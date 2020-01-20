@@ -1,13 +1,25 @@
 #from telethon.sync import TelegramClient
-from telethon import TelegramClient, events
+from telethon import TelegramClient, connection
 
 # Use your own values from my.telegram.org
 api_id = 594415
 api_hash = '25e696d465485373139816665e4f7a32'
 
+DC1_ip = '193.46.56.225'
+DC_port = 443
 
+proxy_ip = 'catalog.live.ovh'
+proxy_port = 443
+secret = 'e2528db4ce33feaabb1c0676f6f676c652e636f6d'
+
+proxy = (proxy_ip, proxy_port, secret)
+
+client = TelegramClient('session_name_1', api_id, api_hash, proxy=(proxy_ip,
+proxy_port, secret),  connection=connection.tcpmtproxy.ConnectionTcpMTProxy)
+client.session.set_dc(1, DC1_ip, DC_port)
+client.start()
 #print(client.get_me().stringify())
-client = TelegramClient('anon', api_id, api_hash)
+#client = TelegramClient('anon', api_id, api_hash)
 
 
 
